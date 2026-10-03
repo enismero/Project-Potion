@@ -7028,6 +7028,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -2036410469228376182, guid: 6ae20e6abba6b29408bb6d02ef3afda8, type: 3}
   m_PrefabInstance: {fileID: 2129485716}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1934379572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1934379563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd576060ae67dc54bb92ce05828db239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VehicleServer
 --- !u!1 &1945723014
 GameObject:
   m_ObjectHideFlags: 0
@@ -8070,6 +8082,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -9038585923029775698, guid: 6ae20e6abba6b29408bb6d02ef3afda8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1934379570}
+    - targetCorrespondingSourceObject: {fileID: -9038585923029775698, guid: 6ae20e6abba6b29408bb6d02ef3afda8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1934379572}
   m_SourcePrefab: {fileID: 100100000, guid: 6ae20e6abba6b29408bb6d02ef3afda8, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
