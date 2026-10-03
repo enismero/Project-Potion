@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class VehicleServer : MonoBehaviour
+public class VehicleSaver : MonoBehaviour
 {
     // Statik (Kalıcı) Hafıza
     private static Vector3 savedPos;
