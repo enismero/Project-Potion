@@ -4,8 +4,14 @@ using TMPro;
 using UnityEngine.EventSystems;
 using JetBrains.Annotations;
 
+//slot kategorileri
+public enum SlotCategory{Storage,Dryer,BottleStand,Pouch}
+
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+    [Header("Slot Type")]
+    public SlotCategory slotCategory=SlotCategory.Storage;
+
     [Header("Slot data")]
     public ItemData currentItem;
     public int amount;
@@ -48,6 +54,26 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         amountText.text="";
     }
 
+
+    //koyulan eşya slot kategoriisinde mi testi
+    public bool CanAcceptItem(ItemData item)
+    {
+        if(item==null) return true;
+
+        switch (slotCategory)
+        {
+            case SlotCategory.Storage: //raf (şişe dışı herşey)
+                return item.itemType!=ItemType.Bottle;
+            case SlotCategory.Dryer: //kurutucu( taze bitki)
+                return item.itemType== ItemType.Plant && item.plantState==PlantState.Fresh;
+            case SlotCategory.BottleStand: //şişe standı (sadece şişe)
+                return item.itemType==ItemType.Bottle;
+            case SlotCategory.Pouch:
+                return true;
+            default:
+                return false;
+        }
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (currentItem == null) return;
@@ -90,6 +116,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         // Gelen bir eşya yoksa veya eşyayı kendi üstüne bıraktıysak hiçbir şey yapma
         if (draggedSlot == null || draggedSlot == this) return;
+
+        //hedef slot eşyaya uygun mu
+        if(!this.CanAcceptItem(draggedSlot.currentItem)) return;
+        //takaslancaksa(swap) elindeki eski slot da eşyayı kabul ediyo mu (İKSİR STANDINDAN İKSİRLE KESEDEKİ BİTKİ DEĞİŞMESİN)
+        if(this.currentItem!=null&& !draggedSlot.CanAcceptItem(this.currentItem)) return;
+
+        //Kurallar geçildiyse taşıma stacke devam et
 
         // DURUM A: ÜST ÜSTE EKLEME (STACK)
         // Eğer gelen eşya ile bu slotun içindeki eşya aynı türdeyse
