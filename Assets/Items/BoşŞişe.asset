@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6690f9f1982664da71e6cfe7f9dc4b, type: 3}
   m_Name: "Bo\u015F\u015Ei\u015Fe"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemID: 
   itemName: "Bo\u015F\u015Ei\u015Fe"
   itemIcon: {fileID: 4824606963088860716, guid: b311ff1afd790874684d68890b643336, type: 3}
   maxStack: 64
+  itemType: 2
+  bottleType: 1
+  plantState: 0
+  plantForm: 0
