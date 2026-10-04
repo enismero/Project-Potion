@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemID: 
   itemName: "Bo\u015F\u015Ei\u015Fe"
-  itemIcon: {fileID: 0}
+  itemIcon: {fileID: 1693982716008732002, guid: b311ff1afd790874684d68890b643336, type: 3}
   maxStack: 64
