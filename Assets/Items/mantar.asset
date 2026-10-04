@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a6690f9f1982664da71e6cfe7f9dc4b, type: 3}
-  m_Name: Lale
+  m_Name: mantar
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemID: 
-  itemName: lale
-  itemIcon: {fileID: -3317087584861762471, guid: b311ff1afd790874684d68890b643336, type: 3}
+  itemName: mantar
+  itemIcon: {fileID: 1943875909774627315, guid: b311ff1afd790874684d68890b643336, type: 3}
   maxStack: 64

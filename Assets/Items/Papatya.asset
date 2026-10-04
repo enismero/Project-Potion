@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemID: 
   itemName: papatya
-  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  itemIcon: {fileID: 5076829418683085406, guid: b311ff1afd790874684d68890b643336, type: 3}
   maxStack: 64
