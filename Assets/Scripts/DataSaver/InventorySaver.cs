@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 public class InventorySaver : MonoBehaviour
 {
-    
+    public static InventorySaver instance;
+
     [Header("İçinde Slot Olan Paneller/Canvaslar")]
     public GameObject[] slotContainers;
 
@@ -14,6 +15,8 @@ public class InventorySaver : MonoBehaviour
 
     void Awake()
     {
+        instance=this;
+
         // Verdiğimiz tüm container'lardaki (Canvas'lardaki) slotları tek bir listede sırayla topluyoruz
         List<InventorySlot> tempList = new List<InventorySlot>();
         
@@ -43,7 +46,7 @@ public class InventorySaver : MonoBehaviour
 
     }
 
-    void OnDisable()
+    public void Kaydet()
     {
         if(allSlots==null || allSlots.Length==0) return;
 
