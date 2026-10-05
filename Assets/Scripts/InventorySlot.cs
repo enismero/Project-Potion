@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using UnityEditor.MPE;
 
 //slot kategorileri
-public enum SlotCategory{Storage,Dryer,BottleStand,Pouch}
+public enum SlotCategory{Storage,Dryer,BottleStand,Pouch,Mortar}
 
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
@@ -95,6 +95,8 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 return item.itemType==ItemType.Bottle;
             case SlotCategory.Pouch:
                 return true;
+            case SlotCategory.Mortar: //sadece bitki kuru ve nor
+                return item.itemType==ItemType.Plant&&item.plantForm == PlantForm.Normal;
             default:
                 return false;
         }
