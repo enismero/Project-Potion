@@ -19,3 +19,5 @@ MonoBehaviour:
   bottleType: 0
   plantState: 1
   plantForm: 1
+  diredVersion: {fileID: 11400000, guid: 2f562b4cf870e974d9a4a1c15d955279, type: 2}
+  groundVersion: {fileID: 0}

@@ -20,16 +20,39 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image iconImage;
     public TextMeshProUGUI amountText;
 
+    [Header("Dryer Settings")]
+    public float timeToProcess = 5f;
+    private float processTimer = 0f;
+
     public static InventorySlot draggedSlot;
     private Transform originalParent;
 
     void Start()
-{
-    UpdateSlot(currentItem, amount);
-}
+    {
+        UpdateSlot(currentItem, amount);
+    }
+
+    void Update()
+    {
+        if(slotCategory==SlotCategory.Dryer && currentItem != null)
+        {
+           if(currentItem.itemType==ItemType.Plant && currentItem.plantState==PlantState.Fresh && currentItem.diredVersion != null)
+            {
+                processTimer+=Time.deltaTime;
+                if (processTimer >= timeToProcess)
+                {
+                    ItemData newDriedItem = currentItem.diredVersion;
+                    int currentAmount=amount;
+
+                    UpdateSlot(newDriedItem,currentAmount);
+                }
+            } 
+        }
+    }
 
     public void UpdateSlot(ItemData newItem, int newAmount)
     {
+        processTimer=0f;
         currentItem=newItem;
         amount=newAmount;
 
@@ -48,6 +71,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void ClearSlot()
     {
+        processTimer=0f;
         currentItem=null;
         amount=0;
         iconImage.enabled=false;

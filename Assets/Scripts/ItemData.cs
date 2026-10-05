@@ -26,4 +26,8 @@ public class ItemData : ScriptableObject
     public PlantState plantState = PlantState.None;
     public PlantForm plantForm = PlantForm.None;
 
+    [Header("dönüşümler")]
+    public ItemData diredVersion;
+    public ItemData groundVersion;
+
 }

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a6690f9f1982664da71e6cfe7f9dc4b, type: 3}
-  m_Name: Lale
+  m_Name: Papatya_kuru
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: lale
-  itemIcon: {fileID: -3317087584861762471, guid: b311ff1afd790874684d68890b643336, type: 3}
+  itemName: papatya
+  itemIcon: {fileID: 403051563107047304, guid: f948cd3aaa8dd114dbd390fdd9d1b350, type: 3}
   maxStack: 64
   itemType: 1
   bottleType: 0
-  plantState: 1
+  plantState: 2
   plantForm: 1
-  diredVersion: {fileID: 11400000, guid: f19ce3b7abffe2242bbd6cae618f7cf0, type: 2}
+  diredVersion: {fileID: 0}
   groundVersion: {fileID: 0}
