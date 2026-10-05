@@ -20,4 +20,4 @@ MonoBehaviour:
   plantState: 2
   plantForm: 1
   diredVersion: {fileID: 0}
-  groundVersion: {fileID: 0}
+  groundVersion: {fileID: 11400000, guid: 490f900a9169aa84695bcd003c49571e, type: 2}
