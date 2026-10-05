@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using JetBrains.Annotations;
+using UnityEditor.MPE;
 
 //slot kategorileri
 public enum SlotCategory{Storage,Dryer,BottleStand,Pouch}
@@ -98,6 +99,15 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 return false;
         }
     }
+
+    public int GetMaxCapacity(ItemData item)
+    {
+        if(slotCategory== SlotCategory.Dryer) return 1;
+        if (slotCategory== SlotCategory.BottleStand) return 1;
+
+        if(item!=null) return item.maxStack;
+        return 64;
+    }
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (currentItem == null) return;
@@ -141,10 +151,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         // Gelen bir eşya yoksa veya eşyayı kendi üstüne bıraktıysak hiçbir şey yapma
         if (draggedSlot == null || draggedSlot == this) return;
 
+        //tür güvenlik
         //hedef slot eşyaya uygun mu
         if(!this.CanAcceptItem(draggedSlot.currentItem)) return;
-        //takaslancaksa(swap) elindeki eski slot da eşyayı kabul ediyo mu (İKSİR STANDINDAN İKSİRLE KESEDEKİ BİTKİ DEĞİŞMESİN)
-        if(this.currentItem!=null&& !draggedSlot.CanAcceptItem(this.currentItem)) return;
+
+        //slot sınırı öğren 
+        int thisMaxCapacity=this.GetMaxCapacity(draggedSlot.currentItem);
+        int draggedMaxCapacity= draggedSlot.GetMaxCapacity(this.currentItem);
 
         //Kurallar geçildiyse taşıma stacke devam et
 
@@ -153,9 +166,9 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (this.currentItem == draggedSlot.currentItem)
         {
             int totalAmount = this.amount + draggedSlot.amount;
-            int maxStack = this.currentItem.maxStack;
+            
 
-            if (totalAmount <= maxStack)
+            if (totalAmount <= thisMaxCapacity)
             {
                 // Toplam miktar sınırı aşmıyorsa hepsini buraya al, eski slotu tamamen temizle
                 this.UpdateSlot(this.currentItem, totalAmount);
@@ -164,8 +177,10 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             else
             {
                 // Miktar sınırı aşıyorsa, sığabildiği kadarını al, kalanı eski slotta bırak
-                int leftover = totalAmount - maxStack;
-                this.UpdateSlot(this.currentItem, maxStack);
+                int leftover = totalAmount - thisMaxCapacity;
+                if (leftover == draggedSlot.amount) return; // Hedef zaten tam doluysa işlem yapma
+                
+                this.UpdateSlot(this.currentItem, thisMaxCapacity);
                 draggedSlot.UpdateSlot(draggedSlot.currentItem, leftover);
             }
         }
@@ -173,16 +188,27 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         // Eşyalar farklıysa veya bu slot boşsa, ikisinin verilerini birbiriyle takas et
         else
         {
-            ItemData tempItem = this.currentItem;
-            int tempAmount = this.amount;
-
-            // Kendi verimizi, gelen eşyanın verisiyle güncelliyoruz
-            this.UpdateSlot(draggedSlot.currentItem, draggedSlot.amount);
+            if(this.currentItem!=null && !draggedSlot.CanAcceptItem(this.currentItem)) return;
             
-            // Gelen eşyanın eski slotuna da, kendi verimizi (veya boşsak boşluğu) gönderiyoruz
-            draggedSlot.UpdateSlot(tempItem, tempAmount);
+            if(this.currentItem==null && draggedSlot.amount > thisMaxCapacity)
+            {
+                this.UpdateSlot(draggedSlot.currentItem, thisMaxCapacity); //sadece 1 al
+                draggedSlot.UpdateSlot(draggedSlot.currentItem,draggedSlot.amount-thisMaxCapacity); //kalanı yerine gönder
+            }
+            else if(this.currentItem!=null&&(draggedSlot.amount>thisMaxCapacity || this.amount > draggedMaxCapacity))
+            {
+                return;
+            }
+            else
+            {
+                ItemData tempItem = this.currentItem;
+                int tempAmount = this.amount;
+
+                this.UpdateSlot(draggedSlot.currentItem,draggedSlot.amount);
+                // Gelen eşyanın eski slotuna da, kendi verimizi (veya boşsak boşluğu) gönderiyoruz
+                draggedSlot.UpdateSlot(tempItem, tempAmount);
+            }
+              
         }
     }
-
-
 }
