@@ -21,6 +21,8 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Image iconImage;
     public TextMeshProUGUI amountText;
 
+    public Image progressBar; //dryer progress bar
+
     [Header("Dryer Settings")]
     public float timeToProcess = 5f;
     private float processTimer = 0f;
@@ -34,12 +36,19 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
     void Update()
-    {
+    {   //Dryer
         if(slotCategory==SlotCategory.Dryer && currentItem != null)
         {
            if(currentItem.itemType==ItemType.Plant && currentItem.plantState==PlantState.Fresh && currentItem.diredVersion != null)
             {
                 processTimer+=Time.deltaTime;
+
+                if (progressBar != null)
+                {
+                    progressBar.fillAmount=processTimer/timeToProcess;
+                    progressBar.enabled=true;
+                }
+
                 if (processTimer >= timeToProcess)
                 {
                     ItemData newDriedItem = currentItem.diredVersion;
@@ -54,6 +63,12 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void UpdateSlot(ItemData newItem, int newAmount)
     {
         processTimer=0f;
+        //eşya değiştiğinde barı sıfırla
+        if (progressBar != null)
+        {
+            progressBar.fillAmount = 0f;
+            progressBar.enabled = false;
+        }
         currentItem=newItem;
         amount=newAmount;
 
@@ -73,6 +88,14 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void ClearSlot()
     {
         processTimer=0f;
+        
+        // Eşya geri alındığında barı sıfırla ve gizle
+        if (progressBar != null)
+        {
+            progressBar.fillAmount = 0f;
+            progressBar.enabled = false;
+        }
+
         currentItem=null;
         amount=0;
         iconImage.enabled=false;
@@ -106,6 +129,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         if(slotCategory== SlotCategory.Dryer) return 1;
         if (slotCategory== SlotCategory.BottleStand) return 1;
+        if(slotCategory==SlotCategory.Mortar) return 1;
 
         if(item!=null) return item.maxStack;
         return 64;
