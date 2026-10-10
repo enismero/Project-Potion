@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a6690f9f1982664da71e6cfe7f9dc4b, type: 3}
-  m_Name: ot_kuru_ezme
+  m_Name: "Ada\xC7ay\u0131_ezme"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: ot
-  itemIcon: {fileID: 3267672768722310255, guid: 5e8776555f3e2a645961cb324c8df0d5, type: 3}
+  itemIcon: {fileID: 8640837988939512085, guid: b127c90f03fd87e458d25ad9931a5573, type: 3}
   maxStack: 64
   itemType: 1
   bottleType: 0
-  plantState: 2
+  plantState: 1
   plantForm: 2
-  diredVersion: {fileID: 0}
+  diredVersion: {fileID: 11400000, guid: 215e883e0c5be9d4a8e0be8c213c776e, type: 2}
   groundVersion: {fileID: 0}
