@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a6690f9f1982664da71e6cfe7f9dc4b, type: 3}
-  m_Name: iksir1
+  m_Name: "Can \u0130ksiri"
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: "\u0130ksir1"
+  itemName: "Can \u0130ksiri"
   itemIcon: {fileID: 1693982716008732002, guid: b311ff1afd790874684d68890b643336, type: 3}
   maxStack: 64
   itemType: 2
   bottleType: 2
   plantState: 0
   plantForm: 0
+  diredVersion: {fileID: 0}
+  groundVersion: {fileID: 0}

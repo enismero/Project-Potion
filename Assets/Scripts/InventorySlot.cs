@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using UnityEditor.MPE;
 
 //slot kategorileri
-public enum SlotCategory{Storage,Dryer,BottleStand,Pouch,Mortar,Recepies}
+public enum SlotCategory{Storage,Dryer,BottleStand,Pouch,Mortar,s}
 
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
