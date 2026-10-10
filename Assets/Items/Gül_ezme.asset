@@ -15,9 +15,9 @@ MonoBehaviour:
   itemName: "g\xFCl"
   itemIcon: {fileID: -5012325012628235758, guid: b127c90f03fd87e458d25ad9931a5573, type: 3}
   maxStack: 64
-  itemType: 0
+  itemType: 1
   bottleType: 0
   plantState: 1
   plantForm: 2
-  diredVersion: {fileID: 11400000, guid: c5efb10bdc0fb3241a1a1b45dfb5edc0, type: 2}
+  diredVersion: {fileID: 11400000, guid: be15c1db936289743a4738f170a725f4, type: 2}
   groundVersion: {fileID: 0}

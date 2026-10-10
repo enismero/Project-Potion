@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Papatya_kuru_ezme
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: papatya
-  itemIcon: {fileID: 403051563107047304, guid: f948cd3aaa8dd114dbd390fdd9d1b350, type: 3}
+  itemIcon: {fileID: -3212571584311976057, guid: 5e8776555f3e2a645961cb324c8df0d5, type: 3}
   maxStack: 64
   itemType: 1
   bottleType: 0
   plantState: 2
-  plantForm: 1
+  plantForm: 2
   diredVersion: {fileID: 0}
   groundVersion: {fileID: 0}

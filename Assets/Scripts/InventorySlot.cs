@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using UnityEditor.MPE;
 
 //slot kategorileri
-public enum SlotCategory{Storage,Dryer,BottleStand,Pouch,Mortar}
+public enum SlotCategory{Storage,Dryer,BottleStand,Pouch,Mortar,Recepies}
 
 public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
@@ -144,6 +144,14 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Canvas canvas = GetComponentInParent<Canvas>();
         iconImage.transform.SetParent(canvas.transform);
         iconImage.transform.SetAsLastSibling();
+        //taşınan ıtemlart için geçiş canvası
+        Canvas tempCanvas =iconImage.gameObject.GetComponent<Canvas>();
+        if (tempCanvas == null)
+        {
+            tempCanvas=iconImage.gameObject.AddComponent<Canvas>();
+        }
+        tempCanvas.overrideSorting=true;
+        tempCanvas.sortingOrder=10;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -168,6 +176,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             // İkonu tekrar kendi slotunun içine al ve tam merkeze oturt
             iconImage.transform.SetParent(originalParent);
             iconImage.transform.localPosition = Vector3.zero; 
+            //taşıma bitince canvası sil
+            Canvas tempCanvas = iconImage.gameObject.GetComponent<Canvas>();
+            if (tempCanvas != null)
+            {
+                Destroy(tempCanvas);
+            }
+
             draggedSlot = null;
         }
     }
