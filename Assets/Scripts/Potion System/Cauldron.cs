@@ -42,7 +42,13 @@ public class Cauldron : MonoBehaviour
     //ADD ITEM
     public void OnDrop(PointerEventData eventData)
     {
-        if(InventorySlot.draggedSlot==null) return;
+        Debug.Log("kazanın üzerine bırakıldı");
+
+        if(InventorySlot.draggedSlot==null) 
+        {
+            Debug.Log("bırakılan boş");
+            return;
+        }
         //kazanda sıvı var mı
         if (currentBase == LiquidBase.None)
         {

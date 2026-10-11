@@ -152,6 +152,13 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
         tempCanvas.overrideSorting=true;
         tempCanvas.sortingOrder=10;
+        //kazana atma için iconu hayalet yap mausedan çıkan ışın için
+        CanvasGroup group=iconImage.gameObject.GetComponent<CanvasGroup>();
+        if (group != null)
+        {
+            group.blocksRaycasts=false;
+        }
+        
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -183,7 +190,17 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 Destroy(tempCanvas);
             }
 
+            //kazana atma için iconu hayalet yap mausedan çıkan ışın için
+            CanvasGroup group=iconImage.gameObject.GetComponent<CanvasGroup>();
+            if (group != null)
+            {
+                group.blocksRaycasts=true;
+            }
+        
+
             draggedSlot = null;
+            
+            
         }
     }
 
