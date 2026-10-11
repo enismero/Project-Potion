@@ -40,15 +40,10 @@ public class Cauldron : MonoBehaviour
     }
 
     //ADD ITEM
-    public void OnDrop(PointerEventData eventData)
+    public void AcceptItem(InventorySlot droppedSlot)
     {
         Debug.Log("kazanın üzerine bırakıldı");
 
-        if(InventorySlot.draggedSlot==null) 
-        {
-            Debug.Log("bırakılan boş");
-            return;
-        }
         //kazanda sıvı var mı
         if (currentBase == LiquidBase.None)
         {
@@ -56,8 +51,8 @@ public class Cauldron : MonoBehaviour
             return;
         }
 
-        ItemData droppedItem = InventorySlot.draggedSlot.currentItem;
-        int droppedAmount=InventorySlot.draggedSlot.amount;
+        ItemData droppedItem = droppedSlot.currentItem;
+        int droppedAmount=droppedSlot.amount;
 
         //ekleneni geçmişe kaydet
         RecipeStep step = new RecipeStep();
@@ -66,10 +61,11 @@ public class Cauldron : MonoBehaviour
         step.amount=droppedAmount;
 
         actionHistory.Add(step);
+
         Debug.Log(droppedAmount + " " + droppedItem.itemName + " atıldı.");
 
         //atılanı sil
-        InventorySlot.draggedSlot.ClearSlot();
+        droppedSlot.ClearSlot();
         
     }
 

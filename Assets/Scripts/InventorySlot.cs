@@ -144,20 +144,17 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Canvas canvas = GetComponentInParent<Canvas>();
         iconImage.transform.SetParent(canvas.transform);
         iconImage.transform.SetAsLastSibling();
+
         //taşınan ıtemlart için geçiş canvası
-        Canvas tempCanvas =iconImage.gameObject.GetComponent<Canvas>();
+        Canvas tempCanvas =iconImage.GetComponent<Canvas>();
         if (tempCanvas == null)
         {
             tempCanvas=iconImage.gameObject.AddComponent<Canvas>();
         }
         tempCanvas.overrideSorting=true;
-        tempCanvas.sortingOrder=10;
-        //kazana atma için iconu hayalet yap mausedan çıkan ışın için
-        CanvasGroup group=iconImage.gameObject.GetComponent<CanvasGroup>();
-        if (group != null)
-        {
-            group.blocksRaycasts=false;
-        }
+        tempCanvas.sortingOrder=100; //en üstte dursun
+
+        iconImage.raycastTarget = false;
         
     }
 
@@ -178,26 +175,37 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        //nereye bırakılıyo test için
+        if (eventData.pointerCurrentRaycast.gameObject != null)
+        {
+            Debug.Log("EŞYA ŞUNUN ÜZERİNE BIRAKILDI: " + eventData.pointerCurrentRaycast.gameObject.name);
+        }
+        else
+        {
+            Debug.Log("EŞYA BOŞLUĞA BIRAKILDI!");
+        }
+
+        GameObject hitObject= eventData.pointerCurrentRaycast.gameObject;
+
+        if (hitObject != null)
+        {
+            Cauldron cauldron=hitObject.GetComponent<Cauldron>();
+            if(cauldron!=null) cauldron.AcceptItem(this);
+        }
+        //eşyayı normal rafına geri döndürme
         if (draggedSlot == this)
         {
             // İkonu tekrar kendi slotunun içine al ve tam merkeze oturt
             iconImage.transform.SetParent(originalParent);
             iconImage.transform.localPosition = Vector3.zero; 
             //taşıma bitince canvası sil
-            Canvas tempCanvas = iconImage.gameObject.GetComponent<Canvas>();
+            Canvas tempCanvas = iconImage.GetComponent<Canvas>();
             if (tempCanvas != null)
             {
                 Destroy(tempCanvas);
             }
-
-            //kazana atma için iconu hayalet yap mausedan çıkan ışın için
-            CanvasGroup group=iconImage.gameObject.GetComponent<CanvasGroup>();
-            if (group != null)
-            {
-                group.blocksRaycasts=true;
-            }
         
-
+            iconImage.raycastTarget = true;
             draggedSlot = null;
             
             
