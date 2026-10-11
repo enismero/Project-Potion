@@ -175,7 +175,7 @@ public class Cauldron : MonoBehaviour
         }
         if (matchedRecipe != null)
         {
-            Debug.Log(matchedRecipe.recipeName + " üretildi");
+            Debug.Log(matchedRecipe.resultItem.itemName  + " üretildi");
             bottleSlot.UpdateSlot(matchedRecipe.resultItem,1);
         }
         else

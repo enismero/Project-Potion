@@ -176,13 +176,14 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnEndDrag(PointerEventData eventData)
     {
         //nereye bırakılıyo test için
+        string itemName=(currentItem!=null)?currentItem.itemName:"Boş eşya";
         if (eventData.pointerCurrentRaycast.gameObject != null)
         {
-            Debug.Log("EŞYA ŞUNUN ÜZERİNE BIRAKILDI: " + eventData.pointerCurrentRaycast.gameObject.name);
+            Debug.Log(itemName+" ŞUNUN ÜZERİNE BIRAKILDI: " + eventData.pointerCurrentRaycast.gameObject.name);
         }
         else
         {
-            Debug.Log("EŞYA BOŞLUĞA BIRAKILDI!");
+            Debug.Log(itemName+" BOŞLUĞA BIRAKILDI");
         }
 
         GameObject hitObject= eventData.pointerCurrentRaycast.gameObject;
