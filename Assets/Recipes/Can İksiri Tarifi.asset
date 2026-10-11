@@ -12,6 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02c39780435bcdd429127ad1403e63c5, type: 3}
   m_Name: "Can \u0130ksiri Tarifi"
   m_EditorClassIdentifier: Assembly-CSharp::RecipeData
-  recepieName: "Can \u0130ksiri"
-  resultItem: {fileID: 0}
-  steps: []
+  recepieName: "Can \u0130ksiri Tarifi"
+  resultItem: {fileID: 11400000, guid: 7084aa0fa2c1af24bb2cecb5b5590770, type: 2}
+  steps:
+  - actionType: 0
+    requiredBase: 1
+    requiredItem: {fileID: 0}
+    amount: 0
+    boilCount: 0
+  - actionType: 2
+    requiredBase: 0
+    requiredItem: {fileID: 0}
+    amount: 0
+    boilCount: 1
+  - actionType: 1
+    requiredBase: 0
+    requiredItem: {fileID: 11400000, guid: a60013094c2b6ba418a3489b6f1e35ff, type: 2}
+    amount: 1
+    boilCount: 0
+  - actionType: 2
+    requiredBase: 0
+    requiredItem: {fileID: 0}
+    amount: 0
+    boilCount: 1
+  - actionType: 1
+    requiredBase: 0
+    requiredItem: {fileID: 11400000, guid: aa1cd8094853a5042842d55114a1432d, type: 2}
+    amount: 3
+    boilCount: 0
+  - actionType: 2
+    requiredBase: 0
+    requiredItem: {fileID: 0}
+    amount: 0
+    boilCount: 1

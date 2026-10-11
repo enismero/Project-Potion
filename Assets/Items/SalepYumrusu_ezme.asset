@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a6690f9f1982664da71e6cfe7f9dc4b, type: 3}
   m_Name: SalepYumrusu_ezme
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: mantar
+  itemName: SalepYumrusu ezme
   itemIcon: {fileID: -6995441537820267288, guid: b127c90f03fd87e458d25ad9931a5573, type: 3}
   maxStack: 64
   itemType: 1

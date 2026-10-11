@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using System.Runtime.CompilerServices;
 
 public class Cauldron : MonoBehaviour
 {
@@ -11,6 +12,12 @@ public class Cauldron : MonoBehaviour
     [Header("kazanın şuanki hafızası")]
     public LiquidBase currentBase = LiquidBase.None; //hangi sıvı bulunuyo
     public List<RecipeStep> actionHistory = new List<RecipeStep>(); //step step ne yapılmış
+
+    //butonla çağırabilmek için (addBase içinde parametreyi anlamadığı için böyle yaptık)
+    public void TestAddWater() { AddBase(LiquidBase.Water); }
+    public void TestAddAlcohol() { AddBase(LiquidBase.Alcohol); }
+    public void TestAddOil() { AddBase(LiquidBase.Oil); }
+    public void TestAddWine() { AddBase(LiquidBase.Wine); }
 
     //ADD BASE LIQUID in cauldron
     //ilerde sıvı ekleyle gelicek
@@ -99,6 +106,44 @@ public class Cauldron : MonoBehaviour
         if (matchedRecipe != null)
         {
             Debug.Log("yapılan iksir"+matchedRecipe.recepieName);
+            emptyBottleSlot.UpdateSlot(matchedRecipe.resultItem,1);
         }
+        else
+        {
+            Debug.Log("iksir yapılamadı");
+        }
+        ResetCauldron();
+    }
+
+    //yapılanla tarifleri karşılaştırıcak kısım
+    private bool CheckRecipeMatch(RecipeData recipe)
+    {
+        //step sayısı uuymuyosa baştan sil
+        if(recipe.steps.Count!=actionHistory.Count) return false;
+
+        for(int i=0; 0< recipe.steps.Count; i++)
+        {
+            RecipeStep required = recipe.steps[i];
+            RecipeStep playerAction = actionHistory[i];
+
+            if(required.actionType != playerAction.actionType) return false;
+
+            if(required.actionType == ActionType.AddBase && required.requiredBase != playerAction.requiredBase) return false;
+
+            if (required.actionType == ActionType.AddItem)
+            {
+                if(required.requiredItem != playerAction.requiredItem || required.amount!=playerAction.amount) return false;
+            }
+
+            if(required.actionType==ActionType.Boil && required.boilCount!=playerAction.boilCount) return false;
+        }
+        return true;
+    }
+
+    public void ResetCauldron()
+    {
+        currentBase=LiquidBase.None;
+        actionHistory.Clear();
+        Debug.Log("kazan temizlendi");
     }
 }
