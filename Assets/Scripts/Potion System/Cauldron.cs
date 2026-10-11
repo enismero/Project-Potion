@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 
 public class Cauldron : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class Cauldron : MonoBehaviour
     [Header("kazanın şuanki hafızası")]
     public LiquidBase currentBase = LiquidBase.None; //hangi sıvı bulunuyo
     public List<RecipeStep> actionHistory = new List<RecipeStep>(); //step step ne yapılmış
+
+    [Header("Damıtma Distill Slot")]
+    public InventorySlot bottleSlot;
+    //boş şişe olucak slot
+
 
     //butonla çağırabilmek için (addBase içinde parametreyi anlamadığı için böyle yaptık)
     public void TestAddWater() { AddBase(LiquidBase.Water); }
@@ -138,12 +144,44 @@ public class Cauldron : MonoBehaviour
 
         if (matchedRecipe != null)
         {
-            Debug.Log("yapılan iksir"+matchedRecipe.recepieName);
+            Debug.Log("yapılan iksir"+matchedRecipe.recipeName);
             emptyBottleSlot.UpdateSlot(matchedRecipe.resultItem,1);
         }
         else
         {
             Debug.Log("iksir yapılamadı");
+        }
+        ResetCauldron();
+    }
+
+    //butonla damıtma fonksiyonu
+    public void TryDistill()
+    {
+        if(bottleSlot==null || bottleSlot.currentItem == null)
+        {
+            Debug.LogWarning("damıtma slotu boş şişe yok");
+            return;
+        }
+        RecipeData matchedRecipe=null;
+
+        //yaptığımız hamleleri karşılaştır
+        foreach(RecipeData recipe in allRecipes)
+        {
+            if (CheckRecipeMatch(recipe))
+            {
+                matchedRecipe=recipe;
+                break; //tarif bulundu
+            }
+        }
+        if (matchedRecipe != null)
+        {
+            Debug.Log(matchedRecipe.recipeName + " üretildi");
+            bottleSlot.UpdateSlot(matchedRecipe.resultItem,1);
+        }
+        else
+        {
+            Debug.LogWarning("başarısız");
+            bottleSlot.ClearSlot();
         }
         ResetCauldron();
     }
@@ -154,7 +192,7 @@ public class Cauldron : MonoBehaviour
         //step sayısı uuymuyosa baştan sil
         if(recipe.steps.Count!=actionHistory.Count) return false;
 
-        for(int i=0; 0< recipe.steps.Count; i++)
+        for(int i=0; i< recipe.steps.Count; i++)
         {
             RecipeStep required = recipe.steps[i];
             RecipeStep playerAction = actionHistory[i];

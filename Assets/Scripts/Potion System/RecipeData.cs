@@ -29,7 +29,7 @@ public class RecipeStep
 public class RecipeData : ScriptableObject
 {
     [Header("Tarif sonucu")]
-    public string recepieName;
+    public string recipeName;
     public ItemData resultItem;
 
     [Header("Sırasıyla yapılışı")]
