@@ -52,21 +52,52 @@ public class Cauldron : MonoBehaviour
         }
 
         ItemData droppedItem = droppedSlot.currentItem;
-        int droppedAmount=droppedSlot.amount;
 
-        //ekleneni geçmişe kaydet
+        //kazandaki son hamleyi kontrol et
+        if (actionHistory.Count > 0)
+        {
+            RecipeStep lastStep =actionHistory[actionHistory.Count-1];
+            //eğer item atıldıysa ve aynıysa
+            if (lastStep.actionType == ActionType.AddItem && lastStep.requiredItem == droppedItem)
+            {
+                lastStep.amount++;
+                Debug.Log("1 tane daha "+ droppedItem.itemName +"atıldı :"+lastStep.amount);
+            }
+            else
+            {
+                // araya yeni işlem giriyosa yeni step yap
+                AddNewItemStep(droppedItem);
+            }
+        }
+        else
+        {
+            //eğer atılan ilk eşyaysa
+            AddNewItemStep(droppedItem);
+        }
+
+        //elden 1 tane al
+        droppedSlot.amount--;
+
+        if (droppedSlot.amount <= 0)
+        {
+            droppedSlot.ClearSlot();//hiç yoksa full boşalt
+        }
+        else
+        {
+            //dah kaldıysa güncelle
+            droppedSlot.UpdateSlot(droppedSlot.currentItem,droppedSlot.amount);
+        }
+    }
+
+    private void AddNewItemStep(ItemData item)
+    {
         RecipeStep step = new RecipeStep();
-        step.actionType=ActionType.AddItem;
-        step.requiredItem=droppedItem;
-        step.amount=droppedAmount;
+        step.actionType = ActionType.AddItem;
+        step.requiredItem = item;
+        step.amount = 1; // Sadece 1 tane ekle
 
         actionHistory.Add(step);
-
-        Debug.Log(droppedAmount + " " + droppedItem.itemName + " atıldı.");
-
-        //atılanı sil
-        droppedSlot.ClearSlot();
-        
+        Debug.Log("1 tane " + item.itemName + " atıldı");
     }
 
     //BOİLİNG
