@@ -4670,6 +4670,7 @@ GameObject:
   - component: {fileID: 1311303428}
   - component: {fileID: 1311303427}
   - component: {fileID: 1311303426}
+  - component: {fileID: 1311303429}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -4741,10 +4742,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2044513232}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PassTime
-        m_Mode: 3
+      - m_Target: {fileID: 1311303429}
+        m_TargetAssemblyTypeName: TimePassButton, Assembly-CSharp
+        m_MethodName: ClickToPassTime
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4791,6 +4792,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311303424}
   m_CullTransparentMesh: 1
+--- !u!114 &1311303429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311303424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee75fedaec990a84182e048f9593d7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimePassButton
+  minutesToPass: 180
 --- !u!1 &1367191221
 GameObject:
   m_ObjectHideFlags: 0
@@ -7241,6 +7255,7 @@ GameObject:
   - component: {fileID: 1803272851}
   - component: {fileID: 1803272854}
   - component: {fileID: 1803272853}
+  - component: {fileID: 1803272855}
   - component: {fileID: 1803272852}
   m_Layer: 5
   m_Name: Button
@@ -7313,16 +7328,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2044513232}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PassTime
-        m_Mode: 3
+      - m_Target: {fileID: 1803272855}
+        m_TargetAssemblyTypeName: TimePassButton, Assembly-CSharp
+        m_MethodName: ClickToPassTime
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 180
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 120
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1803272853
@@ -7363,6 +7378,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803272850}
   m_CullTransparentMesh: 1
+--- !u!114 &1803272855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803272850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee75fedaec990a84182e048f9593d7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimePassButton
+  minutesToPass: 180
 --- !u!1 &1920765541
 GameObject:
   m_ObjectHideFlags: 0
@@ -7375,6 +7403,7 @@ GameObject:
   - component: {fileID: 1920765545}
   - component: {fileID: 1920765544}
   - component: {fileID: 1920765543}
+  - component: {fileID: 1920765546}
   m_Layer: 5
   m_Name: "\u0130\xE7eri Gir"
   m_TagString: Untagged
@@ -7446,7 +7475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2044513230}
+      - m_Target: {fileID: 1920765546}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: LoadTargetScene
         m_Mode: 5
@@ -7496,6 +7525,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1920765541}
   m_CullTransparentMesh: 1
+--- !u!114 &1920765546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1920765541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba34046c5e4d834f94ba47dd4f26b16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneChanger
 --- !u!1 &1934379563 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -9038585923029775698, guid: 6ae20e6abba6b29408bb6d02ef3afda8, type: 3}
@@ -7990,6 +8031,7 @@ GameObject:
   - component: {fileID: 2029661372}
   - component: {fileID: 2029661371}
   - component: {fileID: 2029661370}
+  - component: {fileID: 2029661373}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -8061,10 +8103,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2044513232}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: PassTime
-        m_Mode: 3
+      - m_Target: {fileID: 2029661373}
+        m_TargetAssemblyTypeName: TimePassButton, Assembly-CSharp
+        m_MethodName: ClickToPassTime
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -8111,6 +8153,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2029661368}
   m_CullTransparentMesh: 1
+--- !u!114 &2029661373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029661368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee75fedaec990a84182e048f9593d7a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimePassButton
+  minutesToPass: 180
 --- !u!1 &2040077069
 GameObject:
   m_ObjectHideFlags: 0
@@ -8232,7 +8287,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2044513231}
-  - component: {fileID: 2044513230}
   - component: {fileID: 2044513232}
   m_Layer: 0
   m_Name: GameManager
@@ -8241,18 +8295,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2044513230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044513229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba34046c5e4d834f94ba47dd4f26b16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneChanger
 --- !u!4 &2044513231
 Transform:
   m_ObjectHideFlags: 0
