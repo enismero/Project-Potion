@@ -97,6 +97,12 @@ public class Cauldron : MonoBehaviour
 
     private void AddNewItemStep(ItemData item)
     {
+        //eğer liste yoksa oluştur
+        if (actionHistory == null)
+        {
+            actionHistory=new List<RecipeStep>();
+        }
+        
         RecipeStep step = new RecipeStep();
         step.actionType = ActionType.AddItem;
         step.requiredItem = item;
