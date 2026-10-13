@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance=this;
+            DontDestroyOnLoad(gameObject); //sahne değişiminde silme
         }
         else
         {
@@ -44,7 +45,7 @@ public class GameManager : MonoBehaviour
         UpdateUI();
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         if(dayText!=null) dayText.text="Gün "+currentDay;
 
