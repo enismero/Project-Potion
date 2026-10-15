@@ -63,4 +63,37 @@ public class InventorySaver : MonoBehaviour
         }
         hasSaved=true;
     }
+
+    //haritada eşya bulunca çağır
+    public static void AddItemToSaveData(ItemData newItem, int addAmount)
+    {
+        if(!hasSaved || savedItems == null)
+        {
+            Debug.LogWarning("kayıt yok");
+            return;
+        }
+        //envanterde zaten var
+        for (int i=0; i < savedItems.Length; i++)
+        {
+            if(savedItems[i] !=null && savedItems[i] == newItem)
+            {
+                savedAmounts[i]+=addAmount;
+                Debug.Log(newItem.itemName+"vardı "+ addAmount+" eklendi");
+                return;
+            }
+        }
+        //aynısından yok boşluğa koy
+        for(int i = 0; i < savedItems.Length; i++)
+        {
+            if (savedItems[i] == null)
+            {
+                savedItems[i]=newItem;
+                savedAmounts[i]=addAmount;
+                Debug.Log(newItem.itemName +" "+ addAmount + " boşluğa koyuldu");
+                return;
+            }
+        }
+        //hiç boş yer yok
+        Debug.LogWarning("envanter dolu");
+    }
 }

@@ -47,6 +47,7 @@ public class MapLocation : MonoBehaviour
                 foundAnything=true;
 
                 //envantere ekleme kısmı 
+                InventorySaver.AddItemToSaveData(drop.item, amountToGive);
                 
             }
         }
