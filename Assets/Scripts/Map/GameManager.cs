@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Time Settings")]
     public int currentDay=1;
     [Tooltip("1 dknın geçiceği saniye")]
-    public float timeSpeed=10f;
+    public float timeSpeed=180f;
 
     private float currentMinuteInDay=480f;//(8:00=>8.60=480)
 
