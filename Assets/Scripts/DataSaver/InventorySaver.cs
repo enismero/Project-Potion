@@ -72,28 +72,60 @@ public class InventorySaver : MonoBehaviour
             Debug.LogWarning("kayıt yok");
             return;
         }
+
+        int maxStack=newItem.maxStack;
+        int amountLeft=addAmount;
+
         //envanterde zaten var
         for (int i=0; i < savedItems.Length; i++)
         {
-            if(savedItems[i] !=null && savedItems[i] == newItem)
+            if(savedItems[i] == newItem && savedAmounts[i]<maxStack)
             {
-                savedAmounts[i]+=addAmount;
-                Debug.Log(newItem.itemName+"vardı "+ addAmount+" eklendi");
-                return;
+                int spaceLeft = maxStack-savedAmounts[i];
+                if (amountLeft <= spaceLeft)
+                {
+                    savedAmounts[i]+=addAmount;
+                    Debug.Log(newItem.itemName+"vardı "+ addAmount+" eklendi");
+                    amountLeft=0;
+                    return;
+                }
+                else
+                {
+                    savedAmounts[i]=maxStack;
+                    amountLeft-=spaceLeft;
+                    //hepsi sığmıyosa elde tut
+                } 
             }
         }
-        //aynısından yok boşluğa koy
+        //elde eşya kaldıysa boşa koy veya aynısından yoksa koy
         for(int i = 0; i < savedItems.Length; i++)
         {
+            if (amountLeft <= 0) return;
+
             if (savedItems[i] == null)
             {
-                savedItems[i]=newItem;
-                savedAmounts[i]=addAmount;
-                Debug.Log(newItem.itemName +" "+ addAmount + " boşluğa koyuldu");
-                return;
+                savedItems[i] = newItem;
+
+                if (amountLeft <= maxStack)
+                {
+                    savedAmounts[i] = amountLeft;
+                    Debug.Log(newItem.itemName +" "+ addAmount + " boşluğa koyuldu");
+                    amountLeft = 0;
+                    return;
+                }
+                else
+                {
+                    savedAmounts[i] = maxStack;
+                    amountLeft -= maxStack;
+                }
             }
         }
+
         //hiç boş yer yok
-        Debug.LogWarning("envanter dolu");
+        if (amountLeft > 0)
+        {
+            Debug.LogWarning("envanter dolu");
+        }
+        
     }
 }
